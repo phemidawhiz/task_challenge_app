@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'ns-current-challenge',
@@ -6,4 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./current-challenge.component.css'],
   moduleId: module.id
 })
-export class CurrentChallengeComponent {}
+export class CurrentChallengeComponent {
+
+  constructor(private router: Router) { }
+
+  onTap() {
+    this.router.navigate(['/edit'])
+  }
+}

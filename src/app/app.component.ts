@@ -8,6 +8,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   activeChallenge = '';
 
+  constructor() {
+    
+  }
+
   onChallengeInput(challengeDescription: string) {
     this.activeChallenge = challengeDescription;
     console.log('onChallengeInput: ', challengeDescription);

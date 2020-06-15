@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
   selector: 'ns-current-challenge',
@@ -8,10 +8,11 @@ import { Router } from '@angular/router';
   moduleId: module.id
 })
 export class CurrentChallengeComponent {
+  constructor(private router: RouterExtensions) {}
 
-  constructor(private router: Router) { }
-
-  onTap() {
-    this.router.navigate(['/edit'])
+  onEdit() {
+    this.router.navigate(['/edit-challenge']);
   }
+
+  
 }

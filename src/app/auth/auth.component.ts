@@ -1,22 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
   selector: 'ns-auth',
   templateUrl: './auth.component.html',
   styleUrls: ['./auth.component.css'],
-  moduleId: module.id,
+  moduleId: module.id
 })
 export class AuthComponent implements OnInit {
+  constructor(private router: RouterExtensions) {}
 
-  constructor(private router: RouterExtensions) { }
+  ngOnInit() {}
 
-  ngOnInit() {
+  onSignin() {
+    this.router.navigate(['/today'], { clearHistory: true });
   }
-
-  onTap() {
-    this.router.navigate(['/today'], { clearHistory: true })
-  }
-
 }

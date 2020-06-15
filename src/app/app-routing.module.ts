@@ -8,10 +8,10 @@ import { CurrentChallengeComponent } from './challenges/current-challenge/curren
 import { ChallengeEditComponent } from './challenges/challenge-edit/challenge-edit.component';
 
 const routes: Routes = [
-    { path: '', component: AuthComponent },
-    { path: 'challenge', component: CurrentChallengeComponent },
-    { path: 'edit', component: ChallengeEditComponent },
-    { path: 'today', component: TodayComponent } // must omit slash here
+  { path: '', component: AuthComponent },
+  { path: 'today', component: TodayComponent },
+  { path: 'current-challenge', component: CurrentChallengeComponent },
+  { path: 'edit-challenge', component: ChallengeEditComponent }
 ];
 
 @NgModule({

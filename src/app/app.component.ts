@@ -29,6 +29,10 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
     console.log("toggle side drawer");
   }
 
+  onLogout() {
+    this.uiService.toggleDrawer();
+  }
+
   ngOnDestroy() {
     if(this.drawerSub) {
       this.drawerSub.unsubscribe();

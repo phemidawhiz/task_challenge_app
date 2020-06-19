@@ -18,7 +18,7 @@ import { UIService } from './shared/ui.service';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(RadSideDrawerComponent) drawerComponent: RadSideDrawerComponent;
+  @ViewChild(RadSideDrawerComponent, {static: false}) drawerComponent: RadSideDrawerComponent;
   activeChallenge = '';
   private drawerSub: Subscription;
   private drawer: RadSideDrawer;

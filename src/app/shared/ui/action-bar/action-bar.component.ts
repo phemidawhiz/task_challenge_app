@@ -17,24 +17,24 @@ export class ActionBarComponent implements OnInit {
   @Input() showBackButton = true;
   @Input() hasMenu = true;
 
-  constructor(private page: Page, private router: RouterExtensions, private uiService: UIService) {}
+  constructor(
+    private page: Page,
+    private router: RouterExtensions,
+    private uiService: UIService
+  ) {}
 
   ngOnInit() {}
-
-  get canGoBack() {
-    return this.router.canGoBack() && this.showBackButton;
-  }
 
   get android() {
     return isAndroid;
   }
 
-  onGoBack() {
-    this.router.backToPreviousPage();
+  get canGoBack() {
+    return this.router.canGoBack() && this.showBackButton;
   }
 
-  onToggleMenu() {
-    this.uiService.toggleDrawer();
+  onGoBack() {
+    this.router.backToPreviousPage();
   }
 
   onLoadedActionBar() {
@@ -48,5 +48,9 @@ export class ActionBarComponent implements OnInit {
         );
       }
     }
+  }
+
+  onToggleMenu() {
+    this.uiService.toggleDrawer();
   }
 }

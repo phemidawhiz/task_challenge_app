@@ -1,8 +1,16 @@
-import { Component, OnInit, OnDestroy, ViewChild, ChangeDetectorRef, AfterViewInit } from '@angular/core';
-import { UIService } from './shared/ui.service';
+import {
+  Component,
+  OnInit,
+  OnDestroy,
+  ViewChild,
+  AfterViewInit,
+  ChangeDetectorRef
+} from '@angular/core';
 import { Subscription } from 'rxjs';
 import { RadSideDrawerComponent } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
 import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
+
+import { UIService } from './shared/ui.service';
 
 @Component({
   selector: 'ns-app',
@@ -10,23 +18,33 @@ import { RadSideDrawer } from 'nativescript-ui-sidedrawer';
   templateUrl: './app.component.html'
 })
 export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
-  @ViewChild(RadSideDrawerComponent, {static: false}) drawerComponent: RadSideDrawerComponent;
+  @ViewChild(RadSideDrawerComponent) drawerComponent: RadSideDrawerComponent;
   activeChallenge = '';
   private drawerSub: Subscription;
-  private drawer: RadSideDrawer
+  private drawer: RadSideDrawer;
 
-  constructor(private uiService: UIService, private changeDetectorRef: ChangeDetectorRef) {
-    
-  }
+  constructor(
+    private uiService: UIService,
+    private changeDetectionRef: ChangeDetectorRef
+  ) {}
 
   ngOnInit() {
     this.drawerSub = this.uiService.drawerState.subscribe(() => {
-      if(this.drawer) {
+      if (this.drawer) {
         this.drawer.toggleDrawerState();
       }
-      
     });
-    console.log("toggle side drawer");
+  }
+
+  ngAfterViewInit() {
+    this.drawer = this.drawerComponent.sideDrawer;
+
+    this.changeDetectionRef.detectChanges();
+  }
+
+  onChallengeInput(challengeDescription: string) {
+    this.activeChallenge = challengeDescription;
+    console.log('onChallengeInput: ', challengeDescription);
   }
 
   onLogout() {
@@ -34,19 +52,8 @@ export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    if(this.drawerSub) {
+    if (this.drawerSub) {
       this.drawerSub.unsubscribe();
     }
-  }
-
-
-  ngAfterViewInit() {
-    this.drawer = this.drawerComponent.sideDrawer;
-    this.changeDetectorRef.detectChanges();
-  }
-
-  onChallengeInput(challengeDescription: string) {
-    this.activeChallenge = challengeDescription;
-    console.log('onChallengeInput: ', challengeDescription);
   }
 }

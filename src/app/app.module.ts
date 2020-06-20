@@ -11,6 +11,7 @@ import { TodayComponent } from './challenges/today/today.component';
 import { AppRoutingModule } from './app-routing.module';
 import { ActionBarComponent } from './shared/ui/action-bar/action-bar.component';
 import { ChallengeTabsComponent } from './challenges/challenge-tabs/challenge-tabs.component';
+import { DayModalComponent } from './challenges/day-modal/day-modal.component';
 
 // Uncomment and add to NgModule imports if you need to use two-way binding
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
@@ -33,10 +34,12 @@ import { ChallengeTabsComponent } from './challenges/challenge-tabs/challenge-ta
     AuthComponent,
     TodayComponent,
     ActionBarComponent,
-    ChallengeTabsComponent
+    ChallengeTabsComponent,
+    DayModalComponent
   ],
   providers: [],
-  schemas: [NO_ERRORS_SCHEMA]
+  schemas: [NO_ERRORS_SCHEMA],
+  entryComponents: [DayModalComponent]
 })
 /*
 Pass your application module to the bootstrapModule function located in main.ts to start your app

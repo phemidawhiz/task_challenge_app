@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { PageRoute } from 'nativescript-angular/router';
+import { PageRoute, RouterExtensions } from 'nativescript-angular/router';
 
 @Component({
   selector: 'ns-challenge-edit',
@@ -13,7 +13,8 @@ export class ChallengeEditComponent implements OnInit {
 
   constructor(
     private activatedRoute: ActivatedRoute,
-    private pageRoute: PageRoute
+    private pageRoute: PageRoute,
+    private router: RouterExtensions
   ) {}
 
   ngOnInit() {
@@ -29,5 +30,11 @@ export class ChallengeEditComponent implements OnInit {
         }
       });
     });
+  }
+
+  onSubmit(title: string, description: string) {
+    // ...
+    console.log(title, description);
+    this.router.backToPreviousPage();
   }
 }

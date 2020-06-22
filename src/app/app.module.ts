@@ -3,6 +3,7 @@ import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
 import { NativeScriptFormsModule } from 'nativescript-angular/forms';
 import { NativeScriptUISideDrawerModule } from 'nativescript-ui-sidedrawer/angular/side-drawer-directives';
 import { ReactiveFormsModule } from '@angular/forms';
+import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 
 import { AppComponent } from './app.component';
 import { AuthComponent } from './auth/auth.component';
@@ -15,19 +16,19 @@ import { ChallengeActionsModule } from './challenges/challenge-actions/challenge
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
-import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+// import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 @NgModule({
   bootstrap: [AppComponent],
   imports: [
     NativeScriptModule,
     NativeScriptFormsModule,
+    NativeScriptHttpClientModule,
     NativeScriptUISideDrawerModule,
     ReactiveFormsModule,
     AppRoutingModule,
     SharedModule,
-    ChallengeActionsModule,
-    NativeScriptHttpClientModule
+    ChallengeActionsModule
   ],
   declarations: [
     AppComponent,

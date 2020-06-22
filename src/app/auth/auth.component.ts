@@ -40,10 +40,6 @@ export class AuthComponent implements OnInit {
     });
   }
 
-  onSignin() {
-    this.router.navigate(['/today'], { clearHistory: true });
-  }
-
   onSubmit() {
     this.emailEl.nativeElement.focus();
     this.passwordEl.nativeElement.focus();
@@ -63,6 +59,7 @@ export class AuthComponent implements OnInit {
     } else {
       console.log('Signing up ...');
     }
+    this.router.navigate(['/challenges']);
   }
 
   onDone() {

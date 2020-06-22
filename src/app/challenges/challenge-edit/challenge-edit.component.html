@@ -13,7 +13,7 @@
       class="input"
       returnKeyType="next"
       required
-      ngModel
+      [(ngModel)]="title"
       #titleCtrl="ngModel"
     ></TextField>
     <Label
@@ -31,7 +31,7 @@
       class="input"
       returnKeyType="done"
       required
-      ngModel
+      [(ngModel)]="description"
       #descriptionCtrl="ngModel"
     ></TextView>
     <Label

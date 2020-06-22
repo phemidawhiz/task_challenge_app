@@ -15,7 +15,7 @@ import { ChallengeActionsModule } from './challenges/challenge-actions/challenge
 // import { NativeScriptFormsModule } from "nativescript-angular/forms";
 
 // Uncomment and add to NgModule imports if you need to use the HttpClient wrapper
-// import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
+import { NativeScriptHttpClientModule } from "nativescript-angular/http-client";
 
 @NgModule({
   bootstrap: [AppComponent],
@@ -26,7 +26,8 @@ import { ChallengeActionsModule } from './challenges/challenge-actions/challenge
     ReactiveFormsModule,
     AppRoutingModule,
     SharedModule,
-    ChallengeActionsModule
+    ChallengeActionsModule,
+    NativeScriptHttpClientModule
   ],
   declarations: [
     AppComponent,

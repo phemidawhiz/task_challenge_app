@@ -1,32 +1,34 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject } from 'rxjs';
-import { take, tap } from 'rxjs/operators';
+import { take, tap, switchMap } from 'rxjs/operators';
 
 import { Challenge } from './challenge.model';
 import { DayStatus, Day } from './day.model';
+import { AuthService } from '../auth/auth.service';
 
 @Injectable({ providedIn: 'root' })
 export class ChallengeService {
   private _currentChallenge = new BehaviorSubject<Challenge>(null);
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private authService: AuthService) {}
 
   get currentChallenge() {
     return this._currentChallenge.asObservable();
   }
 
   fetchCurrentChallenge() {
-    return this.http
+    return this.authService.user.pipe(switchMap(currentUser => {
+      return this.http
       .get<{
         title: string;
         description: string;
         month: number;
         year: number;
         _days: Day[];
-      }>('https://task-challenge-app.firebaseio.com/challenge.json')
-      .pipe(
-        tap(resData => {
+      }>(`https://task-challenge-app.firebaseio.com/challenge.json?auth=${currentUser.token}`)
+      
+    }), tap(resData => {
           if (resData) {
             const loadedChallenge = new Challenge(
               resData.title,
@@ -81,9 +83,9 @@ export class ChallengeService {
   }
 
   private saveToServer(challenge: Challenge) {
-    this.http
-      .put('https://task-challenge-app.firebaseio.com/challenge.json', challenge)
-      .subscribe(res => {
+    return this.authService.user.pipe(switchMap(currentUser => {
+      return this.http.put(`https://task-challenge-app.firebaseio.com/challenge.json?auth=${currentUser.token}`, currentUser.token)
+    })).subscribe(res => {
         console.log(res);
       });
   }

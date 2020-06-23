@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { RouterExtensions } from 'nativescript-angular/router';
 import { TextField } from 'tns-core-modules/ui/text-field';
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'ns-auth',
@@ -17,7 +18,7 @@ export class AuthComponent implements OnInit {
   @ViewChild('passwordEl', {static: false}) passwordEl: ElementRef<TextField>;
   @ViewChild('emailEl', {static: false}) emailEl: ElementRef<TextField>;
 
-  constructor(private router: RouterExtensions) {}
+  constructor(private router: RouterExtensions, private authService: AuthService) {}
 
   ngOnInit() {
     this.form = new FormGroup({
@@ -57,7 +58,7 @@ export class AuthComponent implements OnInit {
     if (this.isLogin) {
       console.log('Logging in...');
     } else {
-      console.log('Signing up ...');
+      this.authService.signUp(email, password);
     }
     this.router.navigate(['/challenges']);
   }

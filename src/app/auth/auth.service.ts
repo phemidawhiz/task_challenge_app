@@ -1,5 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
+
+const FIRE_BASE_API_KEY = 'your_api_key';
 
 @Injectable({ providedIn: 'root'})
 
@@ -12,7 +16,10 @@ export class AuthService {
             email: email,
             password: password,
             returnSecureToken: true
-        });
+        }).pipe(catchError(errorResponse => {
+            this.handleError(errorResponse.error.error.message);
+            return throwError(errorResponse);
+        }));
     }
 
     login(email: string, password: string) {
@@ -21,5 +28,9 @@ export class AuthService {
             password: password,
             returnSecureToken: true
         });
+    }
+
+    private handleError(errorMessage: string) {
+        console.log(errorMessage);
     }
 }
